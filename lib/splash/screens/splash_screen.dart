@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:news_app/home/home_screen/home_screen.dart';
 import 'package:news_app/splash/bloc/app_cubit.dart';
-import 'package:news_app/values/textstyles.dart';
+import 'package:news_app/values/text_styles.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);

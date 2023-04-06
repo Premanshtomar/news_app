@@ -1,8 +1,13 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/home/home_screen/home_screen.dart';
 import 'package:news_app/splash/bloc/app_cubit.dart';
-import 'package:news_app/values/textstyles.dart';
+import 'package:news_app/values/app_images.dart';
+import 'package:news_app/values/colors.dart';
+import 'package:news_app/values/text_styles.dart';
+import 'package:news_app/widgets/home_page_card.dart';
+import 'package:news_app/widgets/rich_text_widget.dart';
 
 class HeadlinesScreen extends StatelessWidget {
   static const route = '/headlines';
@@ -14,19 +19,9 @@ class HeadlinesScreen extends StatelessWidget {
     return BlocBuilder<AppCubit, AppState>(
       builder: (context, state) {
         return Scaffold(
+          backgroundColor: AppColors.white,
           appBar: AppBar(
-            title: RichText(
-              text: const TextSpan(
-                text: 'h',
-                style: AppTextStyles.appbarTextFirstStyle,
-                children: [
-                  TextSpan(
-                    text: 'eadlines',
-                    style: AppTextStyles.appbarTextSecondStyle,
-                  ),
-                ],
-              ),
-            ),
+            title: customRichText('headlines'),
             actions: [
               IconButton(
                 onPressed: () {
@@ -34,9 +29,7 @@ class HeadlinesScreen extends StatelessWidget {
                     showSearch: false,
                     useSafeArea: true,
                     context: context,
-                    onSelect: (Country country) {
-                      print(country.flagEmoji);
-                    },
+                    onSelect: (Country country) {},
                   );
                 },
                 icon: Text(
@@ -46,7 +39,25 @@ class HeadlinesScreen extends StatelessWidget {
               ),
             ],
           ),
-          body: Container(),
+          body: ListView.builder(
+            itemCount: 15,
+            itemBuilder: (
+              BuildContext context,
+              int index,
+            ) {
+              return InkWell(
+                child: NewsViewCard(
+                  details: index.isEven ? h1 : h2,
+                  thumbnailUrl: AppNetworkImages.newsImage,
+                  headline: index.isEven ? h2 : h1,
+                  source: 'youtube',
+                ),
+                onTap: () async {
+                  Navigator.pushNamed(context, '/details');
+                },
+              );
+            },
+          ),
         );
       },
     );

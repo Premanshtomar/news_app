@@ -1,4 +1,3 @@
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,8 +5,9 @@ import 'package:news_app/splash/bloc/app_cubit.dart';
 import 'package:news_app/values/app_images.dart';
 import 'package:news_app/values/colors.dart';
 import 'package:news_app/values/routes.dart';
-import 'package:news_app/values/textstyles.dart';
+import 'package:news_app/values/text_styles.dart';
 import 'package:news_app/widgets/home_page_card.dart';
+import 'package:news_app/widgets/rich_text_widget.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -19,18 +19,19 @@ class Home extends StatelessWidget {
         var cubit = context.read<AppCubit>();
         return Scaffold(
           appBar: AppBar(
-            title: RichText(
-              text: const TextSpan(
-                text: 'n',
-                style: AppTextStyles.appbarTextFirstStyle,
-                children: [
-                  TextSpan(
-                    text: 'ews.',
-                    style: AppTextStyles.appbarTextSecondStyle,
-                  ),
-                ],
-              ),
-            ),
+            title: customRichText('news'),
+            // RichText(
+            //   text: const TextSpan(
+            //     text: 'n',
+            //     style: AppTextStyles.appbarTextFirstStyle,
+            //     children: [
+            //       TextSpan(
+            //         text: 'ews.',
+            //         style: AppTextStyles.appbarTextSecondStyle,
+            //       ),
+            //     ],
+            //   ),
+            // ),
             actions: [
               IconButton(
                 onPressed: () {
@@ -53,7 +54,8 @@ class Home extends StatelessWidget {
             backgroundColor: AppColors.amberAccent,
           ),
           backgroundColor: AppColors.white,
-          body: ListView.builder(
+          body:
+          ListView.builder(
             itemCount: 15,
             itemBuilder: (BuildContext context,
                 int index,) {
@@ -65,13 +67,6 @@ class Home extends StatelessWidget {
                   source: 'youtube',
                 ),
                 onTap: () async {
-                  // await loadCountryData();
-                  // print(allCountriesData[1]);
-                  // showDialog(context: context, builder: (context){
-                  //   return AlertDialog(
-                  //     content: count(context),
-                  //   );
-                  // });
                   Navigator.pushNamed(context, '/details');
                 },
               );

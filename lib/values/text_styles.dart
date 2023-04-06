@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:news_app/values/colors.dart';
 
@@ -9,24 +8,20 @@ class AppTextStyles {
     color: AppColors.white,
   );
   static const TextStyle appbarTextFirstStyle = TextStyle(
-    fontWeight: FontWeight.w700,
-    fontSize: 36,
-    color: AppColors.amberAccent,
-    fontFamily: 'alka'
-  );
+      fontWeight: FontWeight.w700,
+      fontSize: 36,
+      color: AppColors.amberAccent,
+      fontFamily: 'alka');
   static const TextStyle appbarTextSecondStyle = TextStyle(
-    fontWeight: FontWeight.w700,
-    fontSize: 22,
-    color: AppColors.black,
-    fontFamily: 'alka'
-  );
+      fontWeight: FontWeight.w700,
+      fontSize: 22,
+      color: AppColors.black,
+      fontFamily: 'alka');
 
   static const TextStyle bodyText12 = TextStyle(
     fontSize: 12,
     color: AppColors.white,
   );
-
-
 
   static const TextStyle bodyText12Bold = TextStyle(
     fontWeight: FontWeight.w700,
@@ -43,10 +38,8 @@ class AppTextStyles {
     fontWeight: FontWeight.w700,
   );
 
-  static const TextStyle bodyTextTwoBlack = TextStyle(
-    color: AppColors.black,
-    fontSize: 16
-  );
+  static const TextStyle bodyTextTwoBlack =
+      TextStyle(color: AppColors.black, fontSize: 16);
 
   static const TextStyle bodyTextTwoBlackBold = TextStyle(
     color: AppColors.black,
@@ -54,20 +47,24 @@ class AppTextStyles {
     fontWeight: FontWeight.w700,
   );
 
-  static const TextStyle bodyText18Black = TextStyle(
-    color: AppColors.black,
-    fontSize: 18
-  );
+  static const TextStyle bodyText18Black =
+      TextStyle(color: AppColors.black, fontSize: 18);
 
   static const TextStyle bodyText18BlackBold = TextStyle(
     color: AppColors.black,
     fontSize: 18,
     fontWeight: FontWeight.w700,
   );
-  static const TextStyle bodyText18White = TextStyle(
-    color: AppColors.white,
-    fontSize: 18
+  static const TextStyle bodyText24Black =
+      TextStyle(color: AppColors.black, fontSize: 24);
+
+  static const TextStyle bodyText24BlackBold = TextStyle(
+    color: AppColors.black,
+    fontSize: 24,
+    fontWeight: FontWeight.w700,
   );
+  static const TextStyle bodyText18White =
+      TextStyle(color: AppColors.white, fontSize: 18);
 
   static const TextStyle bodyText18WhiteBold = TextStyle(
     color: AppColors.white,
@@ -84,10 +81,8 @@ class AppTextStyles {
     fontWeight: FontWeight.w700,
   );
 
-  static const TextStyle bodyTextTwo = TextStyle(
-    color: AppColors.white,
-    fontSize: 16
-  );
+  static const TextStyle bodyTextTwo =
+      TextStyle(color: AppColors.white, fontSize: 16);
 
   static const TextStyle bodyTextTwoBold = TextStyle(
     color: AppColors.white,
@@ -98,5 +93,4 @@ class AppTextStyles {
   static const TextStyle flagTextStyle = TextStyle(
     fontSize: 24,
   );
-
 }

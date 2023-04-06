@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/values/colors.dart';
-import 'package:news_app/values/textstyles.dart';
-import 'package:transparent_image/transparent_image.dart';
-
+import 'package:news_app/values/text_styles.dart';
 class NewsViewCard extends StatelessWidget {
   final String headline;
   final String thumbnailUrl;
