@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/splash/bloc/app_cubit.dart';
+import 'package:news_app/values/app_icons.dart';
 import 'package:news_app/values/app_images.dart';
 import 'package:news_app/values/colors.dart';
 import 'package:news_app/values/routes.dart';
@@ -20,26 +20,16 @@ class Home extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: customRichText('news'),
-            // RichText(
-            //   text: const TextSpan(
-            //     text: 'n',
-            //     style: AppTextStyles.appbarTextFirstStyle,
-            //     children: [
-            //       TextSpan(
-            //         text: 'ews.',
-            //         style: AppTextStyles.appbarTextSecondStyle,
-            //       ),
-            //     ],
-            //   ),
-            // ),
             actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(AppIcons.icInfo),
+              ),
               IconButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/search');
                 },
-                icon: const Icon(
-                  CupertinoIcons.search,
-                ),
+                icon: const Icon(AppIcons.icSearch),
               ),
             ],
           ),
@@ -53,12 +43,12 @@ class Home extends StatelessWidget {
             },
             backgroundColor: AppColors.amberAccent,
           ),
-          backgroundColor: AppColors.white,
-          body:
-          ListView.builder(
+          body: ListView.builder(
             itemCount: 15,
-            itemBuilder: (BuildContext context,
-                int index,) {
+            itemBuilder: (
+              BuildContext context,
+              int index,
+            ) {
               return InkWell(
                 child: NewsViewCard(
                   details: index.isEven ? h1 : h2,
@@ -78,9 +68,10 @@ class Home extends StatelessWidget {
   }
 }
 
-String h1 = 'Top Iranian, Saudi envoys meet in China, discuss diplomatic ties - Reuters';
+// todo, to be removed later
+String h1 =
+    'Top Iranian, Saudi envoys meet in China, discuss diplomatic ties - Reuters';
 String h2 = 'The foreign ministers of Iran and Saudi Arabia met in Beijing on '
     'Thursday for the first formal gathering of their top diplomats in more than '
     'seven years, after China brokered a deal to restore relations between the '
     'top regional powers.';
-

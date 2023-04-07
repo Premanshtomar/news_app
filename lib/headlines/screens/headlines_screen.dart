@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/home/home_screen/home_screen.dart';
 import 'package:news_app/splash/bloc/app_cubit.dart';
 import 'package:news_app/values/app_images.dart';
-import 'package:news_app/values/colors.dart';
 import 'package:news_app/values/text_styles.dart';
 import 'package:news_app/widgets/home_page_card.dart';
 import 'package:news_app/widgets/rich_text_widget.dart';
@@ -19,7 +18,6 @@ class HeadlinesScreen extends StatelessWidget {
     return BlocBuilder<AppCubit, AppState>(
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: AppColors.white,
           appBar: AppBar(
             title: customRichText('headlines'),
             actions: [

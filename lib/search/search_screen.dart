@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/values/app_icons.dart';
 import 'package:news_app/values/colors.dart';
 
 class SearchNews extends StatelessWidget {
@@ -14,19 +15,19 @@ class SearchNews extends StatelessWidget {
             child: TextField(
               autofocus: true,
               decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.all(10.0),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: AppColors.amber),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color:AppColors.amber),
-                  ),
+                contentPadding: const EdgeInsets.all(10.0),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: AppColors.amber),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(color: AppColors.amber),
+                ),
                 suffixIcon: IconButton(
                   onPressed: () {},
                   icon: const Icon(
-                    Icons.search,
+                    AppIcons.icSearch,
                     color: AppColors.black,
                   ),
                 ),

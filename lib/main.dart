@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/details/screen/detail_screen.dart';
 import 'package:news_app/headlines/screens/headlines_screen.dart';
 import 'package:news_app/home/home_screen/home_screen.dart';
 import 'package:news_app/search/search_screen.dart';
@@ -9,7 +10,6 @@ import 'package:news_app/splash/screens/splash_screen.dart';
 import 'package:news_app/values/colors.dart';
 import 'package:news_app/values/routes.dart';
 
-import 'home/details/detail_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
         title: 'news.',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          scaffoldBackgroundColor: AppColors.white,
           primaryColor: AppColors.white,
           brightness: Brightness.light,
           appBarTheme: const AppBarTheme(
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
               iconTheme: IconThemeData(
                 color: AppColors.black,
               ),
-              color: Colors.white,
+              color: AppColors.white,
               systemOverlayStyle: SystemUiOverlayStyle(
                 statusBarColor: AppColors.transparent,
                 statusBarBrightness: Brightness.dark,
