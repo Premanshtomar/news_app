@@ -4,4 +4,5 @@ class AppRoutes {
   static const headlines = '/headlines';
   static const search = '/search';
   static const details = '/details';
+  static const info = '/info';
 }

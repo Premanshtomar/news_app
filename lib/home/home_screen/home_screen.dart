@@ -19,15 +19,17 @@ class Home extends StatelessWidget {
         var cubit = context.read<AppCubit>();
         return Scaffold(
           appBar: AppBar(
-            title: customRichText('news'),
+            title: appbarRichText('news'),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoutes.info);
+                },
                 icon: const Icon(AppIcons.icInfo),
               ),
               IconButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/search');
+                  Navigator.pushNamed(context, AppRoutes.search);
                 },
                 icon: const Icon(AppIcons.icSearch),
               ),
@@ -57,7 +59,7 @@ class Home extends StatelessWidget {
                   source: 'youtube',
                 ),
                 onTap: () async {
-                  Navigator.pushNamed(context, '/details');
+                  Navigator.pushNamed(context, AppRoutes.details);
                 },
               );
             },

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:news_app/home/home_screen/home_screen.dart';
 import 'package:news_app/splash/bloc/app_cubit.dart';
-import 'package:news_app/values/text_styles.dart';
+import 'package:news_app/widgets/rich_text_widget.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -16,33 +16,28 @@ class SplashScreen extends StatelessWidget {
         var cubit = context.read<AppCubit>();
         return AnimatedSplashScreen(
           // function: cubit.setDefaultCountry,
-          duration: 2000,
+          duration: 200000,
           splash: Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Row(children: [
-              RichText(
-                text: TextSpan(
-                  text: 'n',
-                  style: AppTextStyles.appbarTextFirstStyle.copyWith(
-                    fontSize: 66,
-                    letterSpacing: 3
-
-                  ),
-                  children: [
-                    TextSpan(
-                      text: 'ews.',
-                      style: AppTextStyles.appbarTextSecondStyle.copyWith(
-                        fontSize: 40,
-                      ),
-                    ),
-                  ],
+            padding: const EdgeInsets.only(left: 28.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                appbarRichText(
+                  'news.',
+                  size1: 66,
+                  size2: 44,
+                  lastColored: true,
                 ),
-              ),
-              const SizedBox(width: 32),
-              const SpinKitFoldingCube(
-                color: Colors.amberAccent,
-              )
-            ]),
+                const SizedBox(width: 32),
+                const Padding(
+                  padding: EdgeInsets.only(top: 25.0),
+                  child: SpinKitFoldingCube(
+                    color: Colors.amberAccent,
+                  ),
+                )
+              ],
+            ),
           ),
           nextScreen: const Home(),
         );

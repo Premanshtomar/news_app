@@ -71,16 +71,16 @@ flutter:
     - assets/files/
 
   fonts:
-     - family: alka
-       fonts:
-         - asset: assets/fonts/Alkatra/Alkatra-VariableFont_wght.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-     - family: dosis
-       fonts:
-         - asset: assets/fonts/Dosis/Dosis-VariableFont_wght.ttf
-#       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+    - family: alka
+      fonts:
+        - asset: assets/fonts/Alkatra/Alkatra-VariableFont_wght.ttf
+    #       - asset: fonts/Schyler-Italic.ttf
+    #         style: italic
+    - family: dosis
+      fonts:
+        - asset: assets/fonts/Dosis/Dosis-VariableFont_wght.ttf
+        - asset: assets/fonts/Dosis/static/Dosis-Bold.ttf
+          weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

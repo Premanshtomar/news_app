@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/home/home_screen/home_screen.dart';
 import 'package:news_app/splash/bloc/app_cubit.dart';
 import 'package:news_app/values/app_images.dart';
+import 'package:news_app/values/routes.dart';
 import 'package:news_app/values/text_styles.dart';
 import 'package:news_app/widgets/home_page_card.dart';
 import 'package:news_app/widgets/rich_text_widget.dart';
@@ -19,7 +20,7 @@ class HeadlinesScreen extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: customRichText('headlines'),
+            title: appbarRichText('headlines'),
             actions: [
               IconButton(
                 onPressed: () {
@@ -51,7 +52,7 @@ class HeadlinesScreen extends StatelessWidget {
                   source: 'youtube',
                 ),
                 onTap: () async {
-                  Navigator.pushNamed(context, '/details');
+                  Navigator.pushNamed(context, AppRoutes.details);
                 },
               );
             },

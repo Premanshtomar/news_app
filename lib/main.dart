@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/details/screen/detail_screen.dart';
 import 'package:news_app/headlines/screens/headlines_screen.dart';
 import 'package:news_app/home/home_screen/home_screen.dart';
+import 'package:news_app/info/screen/info_screen.dart';
 import 'package:news_app/search/search_screen.dart';
 import 'package:news_app/splash/bloc/app_cubit.dart';
 import 'package:news_app/splash/screens/splash_screen.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.search: (context) => const SearchNews(),
           AppRoutes.details: (context) => const DetailScreen(),
           AppRoutes.headlines: (context) => const HeadlinesScreen(),
+          AppRoutes.info: (context) => const InfoScreen(),
         },
         title: 'news.',
         debugShowCheckedModeBanner: false,
