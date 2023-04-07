@@ -12,6 +12,9 @@ import 'package:news_app/values/routes.dart';
 import 'home/details/detail_screen.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark));
   runApp(const MyApp());
 }
 

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/home/home_screen/home_screen.dart';
 import 'package:news_app/splash/bloc/app_cubit.dart';
 import 'package:news_app/values/app_images.dart';
+import 'package:news_app/values/colors.dart';
 import 'package:news_app/values/text_styles.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -37,7 +38,6 @@ class DetailScreen extends StatelessWidget {
                   ),
                 ),
 
-                // backgroundColor: Colors.red,
                 expandedHeight: MediaQuery.of(context).size.height * 0.25,
                 flexibleSpace: FlexibleSpaceBar(
                   title: LayoutBuilder(
@@ -79,38 +79,50 @@ class DetailScreen extends StatelessWidget {
                   return Column(
                     children: [
                       Container(
-                        margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
-                        // color: Colors.red,
-                        child: Text(
-                          h1,
-                          style: AppTextStyles.bodyText24BlackBold,
+                        margin: const EdgeInsets.fromLTRB(4, 10, 4, 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              h1,
+                              style: AppTextStyles.bodyText24BlackBold,
+                            ),
+                             Align(
+                              alignment: Alignment.centerRight,
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: Text(
+                                  'Date',
+                                  textAlign: TextAlign.right,
+                                  style: AppTextStyles.bodyText12Black
+                                      .copyWith(color: AppColors.grey),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        // color: Colors.yellow,
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
                         margin: const EdgeInsets.fromLTRB(0, 8, 0, 10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16.0),
-                              child: Text(
-                                h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2,
-                                style: AppTextStyles.bodyText18Black,
-                              ),
+                            Text(
+                              h2 +
+                                  h2 +
+                                  h2 +
+                                  h2 +
+                                  h2 +
+                                  h2 +
+                                  h2 +
+                                  h2 +
+                                  h2 +
+                                  h2 +
+                                  h2 +
+                                  h2,
+                              style: AppTextStyles.bodyTextTwoBlack,
                             ),
                           ],
                         ),

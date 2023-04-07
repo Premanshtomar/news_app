@@ -9,18 +9,27 @@ class AppTextStyles {
   );
   static const TextStyle appbarTextFirstStyle = TextStyle(
       fontWeight: FontWeight.w700,
-      fontSize: 36,
+      fontSize: 38,
       color: AppColors.amberAccent,
       fontFamily: 'alka');
   static const TextStyle appbarTextSecondStyle = TextStyle(
       fontWeight: FontWeight.w700,
-      fontSize: 22,
+      fontSize: 24,
       color: AppColors.black,
       fontFamily: 'alka');
 
   static const TextStyle bodyText12 = TextStyle(
     fontSize: 12,
     color: AppColors.white,
+  );
+  static const TextStyle bodyText12Black = TextStyle(
+    fontSize: 12,
+    color: AppColors.black,
+  );
+  static const TextStyle bodyText12BlackBold = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w700,
+    color: AppColors.black,
   );
 
   static const TextStyle bodyText12Bold = TextStyle(

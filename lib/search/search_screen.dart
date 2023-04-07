@@ -8,28 +8,31 @@ class SearchNews extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: SizedBox(
-          height: kToolbarHeight-10,
-          child: TextField(
-            autofocus: true,
-            decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: AppColors.amber),
-                  borderRadius: BorderRadius.circular(15),
+        title: Center(
+          child: SizedBox(
+            height: kToolbarHeight - 10,
+            child: TextField(
+              autofocus: true,
+              decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.all(10.0),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: AppColors.amber),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color:AppColors.amber),
+                  ),
+                suffixIcon: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.search,
+                    color: AppColors.black,
+                  ),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: const BorderSide(color:AppColors.amber),
-                ),
-              suffixIcon: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.search,
-                  color: AppColors.black,
-                ),
+                // border: InputBorder.none,
+                hintText: 'Type to Search...',
               ),
-              // border: InputBorder.none,
-              hintText: 'Type to Search...'
             ),
           ),
         ),

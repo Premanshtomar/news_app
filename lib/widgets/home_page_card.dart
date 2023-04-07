@@ -18,19 +18,19 @@ class NewsViewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(12.0),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: AppColors.white,
           boxShadow: [
             BoxShadow(
-              color: AppColors.black.withOpacity(0.3),
+              color: AppColors.black.withOpacity(0.2),
               offset: const Offset(
                 0.0,
-                2.0,
+                0.0,
               ),
-              blurRadius: 10.0,
+              blurRadius: 8.0,
               spreadRadius: 0.0,
             ),
           ],
