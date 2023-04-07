@@ -1,2 +1,3 @@
-const String kUrlBase = 'https://newsapi.org/v2';
-const String kUrlEverything = '$kUrlBase/everything?q=world';
+const String kUrlBase = 'newsapi.org';
+const String kUrlEverything = '/v2/everything?';
+const String kUrlHeadlines = '/v2/top-headlines';

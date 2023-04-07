@@ -7,9 +7,9 @@ import 'package:http_interceptor/http/intercepted_client.dart';
 import 'package:http_interceptor/http/interceptor_contract.dart';
 import 'package:http_interceptor/models/request_data.dart';
 import 'package:http_interceptor/models/response_data.dart';
+import 'package:news_app/network/constant_urls.dart';
 import 'package:news_app/network/network_exceptions.dart';
 import 'package:news_app/utils/constants.dart';
-
 
 class RestApiProvider {
   static Client client = InterceptedClient.build(
@@ -21,18 +21,19 @@ class RestApiProvider {
   static Map<String, String> headers = {
     "Content-type": "application/json",
     "accept-language": "en",
-    'X-Api-Key':'85940a4d7b23488ba7ecd9e9e7c6533e'
+    'X-Api-Key': '41d0a17262644617a77747eb6565182b'
   };
 
   Future<dynamic> getApi(
     String apiUrl, {
-    String authToken = "",
+    Map<String, dynamic>? queryParams,
   }) async {
-    // headers[HttpHeaders.authorizationHeader] = authToken;authToken
     try {
       final response = await client.get(
-        Uri.parse(
+        Uri.https(
+          kUrlBase,
           apiUrl,
+          queryParams,
         ),
         headers: headers,
       );
@@ -48,7 +49,7 @@ class RestApiProvider {
   }) async {
     try {
       final response = await client.post(
-        Uri.parse(apiUrl),
+        Uri.https(kUrlBase, apiUrl),
         body: body,
       );
       return handleResponse(response);

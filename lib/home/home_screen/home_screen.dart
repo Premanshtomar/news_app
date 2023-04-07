@@ -1,8 +1,11 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:news_app/home/models/headlines.dart';
 import 'package:news_app/splash/bloc/app_cubit.dart';
+import 'package:news_app/utils/enums/search_enums.dart';
 import 'package:news_app/values/app_icons.dart';
-import 'package:news_app/values/app_images.dart';
 import 'package:news_app/values/colors.dart';
 import 'package:news_app/values/routes.dart';
 import 'package:news_app/values/text_styles.dart';
@@ -17,6 +20,10 @@ class Home extends StatelessWidget {
     return BlocBuilder<AppCubit, AppState>(
       builder: (context, state) {
         var cubit = context.read<AppCubit>();
+        // if (state.hasError) {
+        //   showErrorDialog(context, 'Something Went Wrong');
+        // }
+
         return Scaffold(
           appBar: AppBar(
             title: appbarRichText('news'),
@@ -27,53 +34,83 @@ class Home extends StatelessWidget {
                 },
                 icon: const Icon(AppIcons.icInfo),
               ),
+              // search in entire news portal
               IconButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.search);
+                  Navigator.pushNamed(
+                    context,
+                    AppRoutes.search,
+                    arguments: SearchEnum.searchInEverThing,
+                  );
                 },
                 icon: const Icon(AppIcons.icSearch),
               ),
+              IconButton(
+                onPressed: () {
+                  showCountryPicker(
+                    // countryFilter:countryListToShow,
+                    showSearch: false,
+                    useSafeArea: true,
+                    context: context,
+                    onSelect: (Country country) {
+                      cubit.onCountrySelected(country);
+                    },
+                  );
+                },
+                icon: Text(
+                  state.selectedCountry!.flagEmoji,
+                  style: AppTextStyles.flagTextStyle,
+                ),
+              ),
             ],
           ),
-          floatingActionButton: FloatingActionButton.extended(
-            label: const Text(
-              'Headlines',
-              style: AppTextStyles.bodyTextBlackBold,
-            ),
+          floatingActionButton: FloatingActionButton(
             onPressed: () {
-              Navigator.pushNamed(context, AppRoutes.headlines);
-            },
-            backgroundColor: AppColors.amberAccent,
-          ),
-          body: ListView.builder(
-            itemCount: 15,
-            itemBuilder: (
-              BuildContext context,
-              int index,
-            ) {
-              return InkWell(
-                child: NewsViewCard(
-                  details: index.isEven ? h1 : h2,
-                  thumbnailUrl: AppNetworkImages.newsImage,
-                  headline: index.isEven ? h2 : h1,
-                  source: 'youtube',
-                ),
-                onTap: () async {
-                  Navigator.pushNamed(context, AppRoutes.details);
-                },
+              Navigator.pushNamed(
+                context,
+                AppRoutes.search,
+                arguments: SearchEnum.searchInCountry,
               );
             },
+            backgroundColor: AppColors.amberAccent,
+            child: const Icon(
+              AppIcons.icSearch2,
+              color: AppColors.black,
+            ),
           ),
+          body: state.isLoading
+              ? const Center(
+                  child: SpinKitFoldingCube(
+                    color: Colors.amberAccent,
+                  ),
+                )
+              : state.hasError
+                  ? const Center(
+                      child: Text(
+                      'Something went Wrong!!',
+                      style: AppTextStyles.bodyText18BlackBold,
+                    ))
+                  : state.articleList.isEmpty
+                      ? const Center(
+                          child: Text(
+                            'List is Empty',
+                            style: AppTextStyles.bodyText18BlackBold,
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: state.articleList.length,
+                          itemBuilder: (
+                            BuildContext context,
+                            int index,
+                          ) {
+                            Article article = state.articleList[index];
+                            return NewsViewCard(
+                              article: article,
+                            );
+                          },
+                        ),
         );
       },
     );
   }
 }
-
-// todo, to be removed later
-String h1 =
-    'Top Iranian, Saudi envoys meet in China, discuss diplomatic ties - Reuters';
-String h2 = 'The foreign ministers of Iran and Saudi Arabia met in Beijing on '
-    'Thursday for the first formal gathering of their top diplomats in more than '
-    'seven years, after China brokered a deal to restore relations between the '
-    'top regional powers.';

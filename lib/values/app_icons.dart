@@ -6,4 +6,5 @@ class AppIcons {
   static const IconData icInfo = Icons.info_outline;
   static const IconData icLove = CupertinoIcons.heart_fill;
   static const IconData icLike = CupertinoIcons.hand_thumbsup_fill;
+  static const IconData icSearch2 = Icons.manage_search;
 }

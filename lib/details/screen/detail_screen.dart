@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/details/bloc/details_cubit.dart';
-import 'package:news_app/home/home_screen/home_screen.dart';
+import 'package:news_app/home/models/headlines.dart';
+import 'package:news_app/utils/date_formater/date_formater.dart';
 import 'package:news_app/values/app_images.dart';
 import 'package:news_app/values/colors.dart';
 import 'package:news_app/values/text_styles.dart';
@@ -12,6 +13,14 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Article article = ModalRoute.of(context)!.settings.arguments as Article;
+    String getDate() {
+      var dateGiven = article.publishedAt;
+      DateTime date = dateFormatter(dateGiven!);
+      String dateToShow = getDateFromDateTime(date);
+      return dateToShow;
+    }
+
     return BlocProvider(
       create: (context) => DetailsCubit(),
       child: BlocBuilder<DetailsCubit, DetailsState>(
@@ -54,7 +63,7 @@ class DetailScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.only(right: 18.0),
                             child: Text(
-                              'Source',
+                              article.source?.name ?? '',
                               style: TextStyle(
                                 color: state.isSliverExpanded
                                     ? Colors.white
@@ -66,7 +75,7 @@ class DetailScreen extends StatelessWidget {
                       },
                     ),
                     background: Image.network(
-                      AppNetworkImages.newsImage,
+                      article.urlToImage ?? AppNetworkImages.newsImage,
                       fit: BoxFit.fill,
                       color: Colors.black.withOpacity(0.32),
                       colorBlendMode: BlendMode.darken,
@@ -84,7 +93,7 @@ class DetailScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                h1,
+                                article.title ?? '',
                                 style: AppTextStyles.bodyText24BlackBold,
                               ),
                               Align(
@@ -92,7 +101,7 @@ class DetailScreen extends StatelessWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.only(right: 10.0),
                                   child: Text(
-                                    'Date',
+                                    getDate(),
                                     textAlign: TextAlign.right,
                                     style: AppTextStyles.bodyText12Black
                                         .copyWith(color: AppColors.grey),
@@ -110,18 +119,7 @@ class DetailScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2 +
-                                    h2,
+                                article.description ?? '',
                                 style: AppTextStyles.bodyTextTwoBlack,
                               ),
                             ],
