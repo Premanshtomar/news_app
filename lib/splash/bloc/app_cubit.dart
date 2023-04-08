@@ -33,7 +33,7 @@ class AppCubit extends Cubit<AppState> {
   }
 
   // Fetching articles on splash screen
-  void onStart([page = 1, fromScroll = false]) async {
+  void onStart([int page = 1, bool fromScroll = false]) async {
     emit(
       state.copyWith(
         isFetchingOnScroll: fromScroll,
@@ -62,7 +62,7 @@ class AppCubit extends Cubit<AppState> {
           updatedArticleList.addAll(res.data!);
         }
       } else {
-        updatedArticleList = res.data!;
+        updatedArticleList = res.data??[];
       }
       // emit state list
       emit(

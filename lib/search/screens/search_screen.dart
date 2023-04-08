@@ -26,6 +26,7 @@ class SearchNews extends StatelessWidget {
               child: SizedBox(
                 height: kToolbarHeight - 10,
                 child: TextField(
+                  controller: cubit.searchTextController,
                   onChanged: (val) async {
                     if (searchType == SearchEnum.searchInPage) {
                       // tod
@@ -45,7 +46,15 @@ class SearchNews extends StatelessWidget {
                       borderSide: const BorderSide(color: AppColors.amber),
                     ),
                     suffixIcon: IconButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        // if (searchType == SearchEnum.searchInPage) {
+                        //   // tod
+                        // } else {
+                        //   await cubit.searchArticles(
+                        //     cubit.searchTextController.text.trim(),
+                        //   );
+                        // }
+                      },
                       icon: const Icon(
                         AppIcons.icSearch,
                         color: AppColors.black,
@@ -65,9 +74,9 @@ class SearchNews extends StatelessWidget {
                   ),
                 )
               : state.hasErrorInSearch
-                  ? const Center(
+                  ? Center(
                       child: Text(
-                        'Something went Wrong!!',
+                        state.errorMessage,
                         style: AppTextStyles.bodyText18BlackBold,
                       ),
                     )

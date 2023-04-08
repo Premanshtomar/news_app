@@ -5,6 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:news_app/home/models/headlines.dart';
 import 'package:news_app/search/bloc/search_cubit.dart';
 import 'package:news_app/splash/bloc/app_cubit.dart';
+import 'package:news_app/utils/constants.dart';
 import 'package:news_app/utils/enums/search_enums.dart';
 import 'package:news_app/values/app_icons.dart';
 import 'package:news_app/values/colors.dart';
@@ -50,7 +51,7 @@ class Home extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   showCountryPicker(
-                    countryFilter: <String>['IN', 'US'],
+                    countryFilter: countryListToShow,
                     showSearch: false,
                     useSafeArea: false,
                     context: context,
@@ -87,9 +88,9 @@ class Home extends StatelessWidget {
                   ),
                 )
               : state.hasError
-                  ? const Center(
+                  ? Center(
                       child: Text(
-                      'Something went Wrong!!',
+                      context.read<SearchCubit>().state.errorMessage,
                       style: AppTextStyles.bodyText18BlackBold,
                     ))
                   : state.articleList.isEmpty

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:news_app/home/models/headlines.dart';
 import 'package:news_app/network/api_provider.dart';
@@ -32,6 +34,8 @@ class ArticleRepo {
       return RepoResponse(error: e.message);
     } on InvalidInputException catch (e) {
       debugPrint(e.toString());
+      return RepoResponse(error: e.message);
+    } on SocketException catch (e) {
       return RepoResponse(error: e.message);
     } catch (e) {
       debugPrint(e.toString());

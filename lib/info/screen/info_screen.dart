@@ -15,12 +15,22 @@ class InfoScreen extends StatelessWidget {
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             const Spacer(),
             appbarRichText('news.', size1: 66, size2: 44, lastColored: true),
             const Text('App Version: $kAppVersion'),
             const Text('Build Number: $kBuildNumber'),
+            const Text(
+              'Search icon in AppBar: Search in result'
+              ' \nlist of a specific Country News.',
+              textAlign: TextAlign.center,
+            ),
+            const Text(
+              'Search icon in Floating Button: Search in result'
+              ' \nlist of world News.',
+              textAlign: TextAlign.center,
+            ),
             const Spacer(),
             Text(
               'Made with \u2665 by Premansh Tomar',

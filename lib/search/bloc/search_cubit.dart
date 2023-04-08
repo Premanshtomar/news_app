@@ -14,6 +14,8 @@ class SearchCubit extends Cubit<SearchState> {
   }
 
   final ScrollController articleScrollController = ScrollController();
+  final TextEditingController searchTextController = TextEditingController();
+  final SearchArticle searchRepo = SearchArticle();
 
   void handleParticipantScroll() {
     if (articleScrollController.position.extentAfter < 150 &&
@@ -36,15 +38,15 @@ class SearchCubit extends Cubit<SearchState> {
   }
 
   void clearSearchQueryText() {
+    searchTextController.clear();
     emit(state.copyWith(
       searchQuery: '',
       articleList: <Article>[],
     ));
   }
 
-  SearchArticle searchRepo = SearchArticle();
-
-  Future<void> searchArticles(String text, [page = 1, fromScroll = false]) async {
+  Future<void> searchArticles(String text,
+      [page = 1, fromScroll = false]) async {
     emit(state.copyWith(
       isFetchingOnScrolling: fromScroll,
       isLoading: !fromScroll,
@@ -64,16 +66,16 @@ class SearchCubit extends Cubit<SearchState> {
         await searchRepo.fetchArticle(text: text, page: page);
     if (result.hasError && result.data == null) {
       // state.error
-      // print(result.error);
       emit(
         state.copyWith(
+          errorMessage: result.error,
           hasErrorInSearch: true,
           isLoading: false,
           isFetchingOnScrolling: false,
         ),
       );
     } else {
-      // copying old articles, adding new to update, for pagination todo
+      // copying old articles, adding new to update, for pagination
       var updatedArticles = <Article>[];
       if (fromScroll) {
         updatedArticles = [...state.articleList];

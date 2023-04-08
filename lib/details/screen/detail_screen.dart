@@ -127,16 +127,30 @@ class DetailScreen extends StatelessWidget {
                                 height:
                                     MediaQuery.of(context).size.height * 0.015,
                               ),
-                              TextButton(
-                                onPressed: () {
-                                  launchURL(article.url!);
-                                },
-                                child: Text(
-                                  article.url ?? '',
-                                  style: AppTextStyles.bodyText12.copyWith(
-                                    color: AppColors.amber,
-                                  ),
-                                ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: TextButton(
+                                    onPressed: () {
+                                      launchURL(article.url!);
+                                    },
+                                    child: RichText(
+                                      text: TextSpan(
+                                        text: 'Read more ',
+                                        style:
+                                            AppTextStyles.bodyText18BlackBold,
+                                        children: [
+                                          TextSpan(
+                                              text: 'Here..',
+                                              style: AppTextStyles
+                                                  .bodyText18BlackBold
+                                                  .copyWith(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                color: AppColors.blueAssent,
+                                              ))
+                                        ],
+                                      ),
+                                    )),
                               ),
                             ],
                           ),

@@ -9,8 +9,10 @@ class SearchState extends Equatable {
   final bool hasErrorInSearch;
   final int page;
   final String searchQuery;
+  final String errorMessage;
 
   const SearchState({
+    this.errorMessage = 'Something Went wrong',
     this.hasErrorInSearch = false,
     this.isLoading = false,
     this.articleList = const [],
@@ -30,22 +32,24 @@ class SearchState extends Equatable {
     int? page,
     String? searchQuery,
     bool? isFetchingOnScrolling,
+    String? errorMessage,
   }) {
     return SearchState(
-      searchType: searchType ?? this.searchType,
-      textToSearch: textToSearch ?? this.textToSearch,
-      articleList: articleList ?? this.articleList,
-      isLoading: isLoading ?? this.isLoading,
-      hasErrorInSearch: hasErrorInSearch ?? this.hasErrorInSearch,
-      page: page ?? this.page,
-      searchQuery: searchQuery ?? this.searchQuery,
-      isFetchingOnScrolling:
-          isFetchingOnScrolling ?? this.isFetchingOnScrolling,
-    );
+        searchType: searchType ?? this.searchType,
+        textToSearch: textToSearch ?? this.textToSearch,
+        articleList: articleList ?? this.articleList,
+        isLoading: isLoading ?? this.isLoading,
+        hasErrorInSearch: hasErrorInSearch ?? this.hasErrorInSearch,
+        page: page ?? this.page,
+        searchQuery: searchQuery ?? this.searchQuery,
+        isFetchingOnScrolling:
+            isFetchingOnScrolling ?? this.isFetchingOnScrolling,
+        errorMessage: errorMessage ?? this.errorMessage);
   }
 
   @override
   List<Object?> get props => [
+        errorMessage,
         hasErrorInSearch,
         isLoading,
         articleList,
