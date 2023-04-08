@@ -3,16 +3,22 @@ part of 'search_cubit.dart';
 class SearchState extends Equatable {
   final SearchEnum searchType;
   final bool isLoading;
+  final bool isFetchingOnScrolling;
   final String textToSearch;
   final List<Article> articleList;
   final bool hasErrorInSearch;
+  final int page;
+  final String searchQuery;
 
   const SearchState({
     this.hasErrorInSearch = false,
     this.isLoading = false,
     this.articleList = const [],
     this.textToSearch = '',
-    this.searchType = SearchEnum.searchInCountry,
+    this.isFetchingOnScrolling = false,
+    this.searchType = SearchEnum.searchInPage,
+    this.page = 1,
+    this.searchQuery = '',
   });
 
   SearchState copyWith({
@@ -21,6 +27,9 @@ class SearchState extends Equatable {
     List<Article>? articleList,
     String? textToSearch,
     SearchEnum? searchType,
+    int? page,
+    String? searchQuery,
+    bool? isFetchingOnScrolling,
   }) {
     return SearchState(
       searchType: searchType ?? this.searchType,
@@ -28,6 +37,10 @@ class SearchState extends Equatable {
       articleList: articleList ?? this.articleList,
       isLoading: isLoading ?? this.isLoading,
       hasErrorInSearch: hasErrorInSearch ?? this.hasErrorInSearch,
+      page: page ?? this.page,
+      searchQuery: searchQuery ?? this.searchQuery,
+      isFetchingOnScrolling:
+          isFetchingOnScrolling ?? this.isFetchingOnScrolling,
     );
   }
 
@@ -38,5 +51,8 @@ class SearchState extends Equatable {
         articleList,
         textToSearch,
         searchType,
+        page,
+        searchQuery,
+        isFetchingOnScrolling,
       ];
 }

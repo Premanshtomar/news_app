@@ -9,10 +9,13 @@ import 'package:news_app/utils/constants.dart';
 class ArticleRepo {
   RestApiProvider provider = RestApiProvider();
 
-  Future<RepoResponse<List<Article>>> fetchArticle([country = 'in']) async {
+  Future<RepoResponse<List<Article>>> fetchArticle(
+      [country = 'in', page = 1, pageSize = 10]) async {
     try {
       var response = await provider.getApi(kUrlHeadlines, queryParams: {
         'country': country,
+        'page': page.toString(),
+        'pageSize': pageSize.toString(),
       });
 
       NewsResults headline =

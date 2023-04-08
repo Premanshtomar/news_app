@@ -21,7 +21,7 @@ class RestApiProvider {
   static Map<String, String> headers = {
     "Content-type": "application/json",
     "accept-language": "en",
-    'X-Api-Key': '41d0a17262644617a77747eb6565182b'
+    'X-Api-Key': '85940a4d7b23488ba7ecd9e9e7c6533e'
   };
 
   Future<dynamic> getApi(

@@ -1,4 +1,4 @@
 enum SearchEnum {
-  searchInCountry,
-  searchInEverThing,
+  searchInPage,
+  searchInNews,
 }

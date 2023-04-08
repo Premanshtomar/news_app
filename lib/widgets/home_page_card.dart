@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/home/models/headlines.dart';
 import 'package:news_app/utils/date_formater/date_formater.dart';
@@ -45,7 +46,6 @@ class NewsViewCard extends StatelessWidget {
               ),
             ],
           ),
-          width: MediaQuery.of(context).size.width,
           // height: MediaQuery.of(context).size.height * 0.45,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,24 +54,53 @@ class NewsViewCard extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.2,
-                decoration: BoxDecoration(
-                  color: AppColors.black,
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(12),
-                    topLeft: Radius.circular(12),
-                  ),
-                  image: DecorationImage(
-                    colorFilter: ColorFilter.mode(
-                      AppColors.black.withOpacity(0.35),
-                      BlendMode.multiply,
-                    ),
-                    image: NetworkImage(
-                        article.urlToImage ?? AppNetworkImages.newsImage),
-                    fit: BoxFit.cover,
-                  ),
-                ),
                 child: Stack(
                   children: [
+                    CachedNetworkImage(
+                      imageUrl:
+                          article.urlToImage ?? AppNetworkImages.newsImage,
+                      errorWidget: (context, url, error) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          decoration: BoxDecoration(
+                            color: AppColors.black,
+                            borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(12),
+                              topLeft: Radius.circular(12),
+                            ),
+                            image: DecorationImage(
+                              colorFilter: ColorFilter.mode(
+                                AppColors.black.withOpacity(0.35),
+                                BlendMode.multiply,
+                              ),
+                              image: const NetworkImage(
+                                  AppNetworkImages.newsImage),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      },
+                      imageBuilder: (context, imageProvider) => Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.2,
+                        decoration: BoxDecoration(
+                          color: AppColors.black,
+                          borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(12),
+                            topLeft: Radius.circular(12),
+                          ),
+                          image: DecorationImage(
+                            colorFilter: ColorFilter.mode(
+                              AppColors.black.withOpacity(0.35),
+                              BlendMode.multiply,
+                            ),
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
                     Align(
                       alignment: Alignment.topLeft,
                       child: Container(
@@ -160,7 +189,7 @@ class NewsViewCard extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: Text(
                         'read more..',
-                        style: AppTextStyles.bodyTextTwoBlackBold,
+                        style: AppTextStyles.bodyText12BlackBold,
                         textAlign: TextAlign.end,
                       ),
                     ),

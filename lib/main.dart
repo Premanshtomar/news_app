@@ -5,6 +5,7 @@ import 'package:news_app/details/screen/detail_screen.dart';
 import 'package:news_app/headlines/screens/headlines_screen.dart';
 import 'package:news_app/home/home_screen/home_screen.dart';
 import 'package:news_app/info/screen/info_screen.dart';
+import 'package:news_app/search/bloc/search_cubit.dart';
 import 'package:news_app/search/screens/search_screen.dart';
 import 'package:news_app/splash/bloc/app_cubit.dart';
 import 'package:news_app/splash/screens/splash_screen.dart';
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (BuildContext context) => AppCubit(),
+        ),
+        BlocProvider(
+          create: (BuildContext context) => SearchCubit(),
         ),
       ],
       child: MaterialApp(

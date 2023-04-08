@@ -1,5 +1,5 @@
-import 'package:country_picker/country_picker.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/home/models/headlines.dart';
 import 'package:news_app/network/repo_response.dart';
@@ -9,7 +9,25 @@ import 'package:news_app/utils/enums/search_enums.dart';
 part 'search_state.dart';
 
 class SearchCubit extends Cubit<SearchState> {
-  SearchCubit() : super(const SearchState());
+  SearchCubit() : super(const SearchState()) {
+    articleScrollController.addListener(handleParticipantScroll);
+  }
+
+  final ScrollController articleScrollController = ScrollController();
+
+  void handleParticipantScroll() {
+    if (articleScrollController.position.extentAfter < 150 &&
+        !state.isFetchingOnScrolling) {
+      if (state.page < 100) {
+        emit(
+          state.copyWith(
+            isLoading: true,
+          ),
+        );
+        searchArticles(state.searchQuery, state.page + 1, true);
+      }
+    }
+  }
 
   void setSearchType(SearchEnum type) {
     emit(
@@ -17,55 +35,61 @@ class SearchCubit extends Cubit<SearchState> {
     );
   }
 
-  SearchArticleInCountryRepo inCountryRepo = SearchArticleInCountryRepo();
-  SearchArticleInEveryThingRepo inEveryThingRepo =
-      SearchArticleInEveryThingRepo();
-
-  void onTypeToSearchInCountry(Country selectedCountry, String text) async {
-    emit(state.copyWith(isLoading: true));
-    RepoResponse<List<Article>> result =
-        await inCountryRepo.fetchArticle(selectedCountry.countryCode, text);
-    if (result.hasError) {
-      // state.error
-      // print(result.error);
-      emit(
-        state.copyWith(
-          hasErrorInSearch: true,
-          isLoading: false,
-        ),
-      );
-    } else {
-      // emit state list
-      emit(
-        state.copyWith(
-          articleList: result.data,
-          hasErrorInSearch: false,
-          isLoading: false,
-        ),
-      );
-    }
+  void clearSearchQueryText() {
+    emit(state.copyWith(
+      searchQuery: '',
+      articleList: <Article>[],
+    ));
   }
 
-  void onTypeToSearchInEverThing(String text) async {
-    emit(state.copyWith(isLoading: true));
+  SearchArticle searchRepo = SearchArticle();
+
+  Future<void> searchArticles(String text, [page = 1, fromScroll = false]) async {
+    emit(state.copyWith(
+      isFetchingOnScrolling: fromScroll,
+      isLoading: !fromScroll,
+      searchQuery: text,
+    ));
+    if (text.isEmpty) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+      emit(
+        state.copyWith(
+          articleList: const [],
+          isLoading: false,
+        ),
+      );
+      return;
+    }
     RepoResponse<List<Article>> result =
-        await inEveryThingRepo.fetchArticle(text);
-    if (result.hasError) {
+        await searchRepo.fetchArticle(text: text, page: page);
+    if (result.hasError && result.data == null) {
       // state.error
       // print(result.error);
       emit(
         state.copyWith(
           hasErrorInSearch: true,
           isLoading: false,
+          isFetchingOnScrolling: false,
         ),
       );
     } else {
-      // emit state list
+      // copying old articles, adding new to update, for pagination todo
+      var updatedArticles = <Article>[];
+      if (fromScroll) {
+        updatedArticles = [...state.articleList];
+        if (result.data!.isNotEmpty) {
+          updatedArticles.addAll(result.data!);
+        }
+      } else {
+        updatedArticles = result.data!;
+      }
       emit(
         state.copyWith(
-          articleList: result.data,
+          articleList: updatedArticles,
           hasErrorInSearch: false,
           isLoading: false,
+          isFetchingOnScrolling: false,
+          page: page,
         ),
       );
     }

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/details/bloc/details_cubit.dart';
 import 'package:news_app/home/models/headlines.dart';
 import 'package:news_app/utils/date_formater/date_formater.dart';
+import 'package:news_app/utils/launch_url.dart';
 import 'package:news_app/values/app_images.dart';
 import 'package:news_app/values/colors.dart';
 import 'package:news_app/values/text_styles.dart';
@@ -121,6 +122,21 @@ class DetailScreen extends StatelessWidget {
                               Text(
                                 article.description ?? '',
                                 style: AppTextStyles.bodyTextTwoBlack,
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.015,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  launchURL(article.url!);
+                                },
+                                child: Text(
+                                  article.url ?? '',
+                                  style: AppTextStyles.bodyText12.copyWith(
+                                    color: AppColors.amber,
+                                  ),
+                                ),
                               ),
                             ],
                           ),

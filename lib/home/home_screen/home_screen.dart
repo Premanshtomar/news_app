@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:news_app/home/models/headlines.dart';
+import 'package:news_app/search/bloc/search_cubit.dart';
 import 'package:news_app/splash/bloc/app_cubit.dart';
 import 'package:news_app/utils/enums/search_enums.dart';
 import 'package:news_app/values/app_icons.dart';
@@ -37,10 +38,11 @@ class Home extends StatelessWidget {
               // search in entire news portal
               IconButton(
                 onPressed: () {
+                  context.read<SearchCubit>().clearSearchQueryText();
                   Navigator.pushNamed(
                     context,
                     AppRoutes.search,
-                    arguments: SearchEnum.searchInEverThing,
+                    arguments: SearchEnum.searchInNews,
                   );
                 },
                 icon: const Icon(AppIcons.icSearch),
@@ -48,9 +50,9 @@ class Home extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   showCountryPicker(
-                    // countryFilter:countryListToShow,
+                    countryFilter: <String>['IN', 'US'],
                     showSearch: false,
-                    useSafeArea: true,
+                    useSafeArea: false,
                     context: context,
                     onSelect: (Country country) {
                       cubit.onCountrySelected(country);
@@ -69,7 +71,7 @@ class Home extends StatelessWidget {
               Navigator.pushNamed(
                 context,
                 AppRoutes.search,
-                arguments: SearchEnum.searchInCountry,
+                arguments: SearchEnum.searchInNews,
               );
             },
             backgroundColor: AppColors.amberAccent,
@@ -98,6 +100,7 @@ class Home extends StatelessWidget {
                           ),
                         )
                       : ListView.builder(
+                          controller: cubit.homePageScrollController,
                           itemCount: state.articleList.length,
                           itemBuilder: (
                             BuildContext context,
