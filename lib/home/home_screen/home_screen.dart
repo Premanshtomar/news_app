@@ -39,7 +39,9 @@ class Home extends StatelessWidget {
               // search in entire news portal
               IconButton(
                 onPressed: () {
-                  context.read<SearchCubit>().clearSearchQueryText();
+                  var searchCubit = context.read<SearchCubit>();
+                  searchCubit.clearSearchQueryText();
+                  searchCubit.searchTextController.clear();
                   Navigator.pushNamed(
                     context,
                     AppRoutes.search,
@@ -69,6 +71,7 @@ class Home extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
+              context.read<SearchCubit>().searchTextController.clear();
               if (state.articleList.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
