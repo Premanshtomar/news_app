@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,11 +76,12 @@ class DetailScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    background: Image.network(
-                      article.urlToImage ?? AppNetworkImages.newsImage,
+                    background: CachedNetworkImage(
                       fit: BoxFit.fill,
                       color: Colors.black.withOpacity(0.32),
                       colorBlendMode: BlendMode.darken,
+                      imageUrl:
+                          article.urlToImage ?? AppNetworkImages.newsImage,
                       // color: Colors.black.withOpacity(0.32),
                     ),
                   ),
@@ -129,28 +131,30 @@ class DetailScreen extends StatelessWidget {
                               ),
                               Align(
                                 alignment: Alignment.center,
-                                child: TextButton(
-                                    onPressed: () {
-                                      launchURL(article.url!);
-                                    },
-                                    child: RichText(
-                                      text: TextSpan(
-                                        text: 'Read more ',
-                                        style:
-                                            AppTextStyles.bodyText18BlackBold,
-                                        children: [
-                                          TextSpan(
-                                              text: 'Here..',
-                                              style: AppTextStyles
-                                                  .bodyText18BlackBold
-                                                  .copyWith(
-                                                decoration:
-                                                    TextDecoration.underline,
-                                                color: AppColors.blueAssent,
-                                              ))
-                                        ],
-                                      ),
-                                    )),
+                                child: RichText(
+                                  text: TextSpan(
+                                    text: 'Read more ',
+                                    style: AppTextStyles.bodyText18BlackBold,
+                                    children: [
+                                      WidgetSpan(
+                                          child: GestureDetector(
+                                        onTap: () {
+                                          launchURL(article.url!);
+                                        },
+                                        child: Text(
+                                          'here',
+                                          style: AppTextStyles
+                                              .bodyText18BlackBold
+                                              .copyWith(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            color: AppColors.blueAssent,
+                                          ),
+                                        ),
+                                      ))
+                                    ],
+                                  ),
+                                ),
                               ),
                             ],
                           ),

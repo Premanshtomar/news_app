@@ -7,7 +7,7 @@ const String kAppVersion = '1.0.0';
 const String kBuildNumber = '1';
 
 /// api-key
-const String kApiKey = '';
+const String kApiKey = '41d0a17262644617a77747eb6565182b';
 
 const List<String> countryListToShow = [
   'AE',

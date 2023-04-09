@@ -10,6 +10,7 @@ class SearchState extends Equatable {
   final int page;
   final String searchQuery;
   final String errorMessage;
+  final List<Article> listFromPage;
 
   const SearchState({
     this.errorMessage = 'Something Went wrong',
@@ -21,6 +22,7 @@ class SearchState extends Equatable {
     this.searchType = SearchEnum.searchInPage,
     this.page = 1,
     this.searchQuery = '',
+    this.listFromPage = const [],
   });
 
   SearchState copyWith({
@@ -33,18 +35,21 @@ class SearchState extends Equatable {
     String? searchQuery,
     bool? isFetchingOnScrolling,
     String? errorMessage,
+    List<Article>? listFromPage,
   }) {
     return SearchState(
-        searchType: searchType ?? this.searchType,
-        textToSearch: textToSearch ?? this.textToSearch,
-        articleList: articleList ?? this.articleList,
-        isLoading: isLoading ?? this.isLoading,
-        hasErrorInSearch: hasErrorInSearch ?? this.hasErrorInSearch,
-        page: page ?? this.page,
-        searchQuery: searchQuery ?? this.searchQuery,
-        isFetchingOnScrolling:
-            isFetchingOnScrolling ?? this.isFetchingOnScrolling,
-        errorMessage: errorMessage ?? this.errorMessage);
+      searchType: searchType ?? this.searchType,
+      textToSearch: textToSearch ?? this.textToSearch,
+      articleList: articleList ?? this.articleList,
+      isLoading: isLoading ?? this.isLoading,
+      hasErrorInSearch: hasErrorInSearch ?? this.hasErrorInSearch,
+      page: page ?? this.page,
+      searchQuery: searchQuery ?? this.searchQuery,
+      isFetchingOnScrolling:
+          isFetchingOnScrolling ?? this.isFetchingOnScrolling,
+      errorMessage: errorMessage ?? this.errorMessage,
+      listFromPage: listFromPage ?? this.listFromPage,
+    );
   }
 
   @override
@@ -58,5 +63,6 @@ class SearchState extends Equatable {
         page,
         searchQuery,
         isFetchingOnScrolling,
+        listFromPage,
       ];
 }

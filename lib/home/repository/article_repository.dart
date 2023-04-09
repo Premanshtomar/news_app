@@ -36,6 +36,7 @@ class ArticleRepo {
       debugPrint(e.toString());
       return RepoResponse(error: e.message);
     } on SocketException catch (e) {
+      print('lmao lmao lmao lmao');
       return RepoResponse(error: e.message);
     } catch (e) {
       debugPrint(e.toString());

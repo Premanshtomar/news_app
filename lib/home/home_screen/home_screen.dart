@@ -69,11 +69,22 @@ class Home extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              Navigator.pushNamed(
-                context,
-                AppRoutes.search,
-                arguments: SearchEnum.searchInNews,
-              );
+              if (state.articleList.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Nothing to find in page'),
+                  ),
+                );
+              } else {
+                context
+                    .read<SearchCubit>()
+                    .setPreviousPageList(state.articleList);
+                Navigator.pushNamed(
+                  context,
+                  AppRoutes.search,
+                  arguments: SearchEnum.searchInPage,
+                );
+              }
             },
             backgroundColor: AppColors.amberAccent,
             child: const Icon(
@@ -90,9 +101,10 @@ class Home extends StatelessWidget {
               : state.hasError
                   ? Center(
                       child: Text(
-                      context.read<SearchCubit>().state.errorMessage,
-                      style: AppTextStyles.bodyText18BlackBold,
-                    ))
+                        state.error!,
+                        style: AppTextStyles.bodyText18BlackBold,
+                      ),
+                    )
                   : state.articleList.isEmpty
                       ? const Center(
                           child: Text(

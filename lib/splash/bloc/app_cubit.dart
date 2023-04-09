@@ -44,11 +44,10 @@ class AppCubit extends Cubit<AppState> {
       state.selectedCountry!.countryCode,
       page,
     );
-    if (res.hasError && res.data != null) {
-      // state.error
-      // print(res.error);
+    if (res.hasError && res.data == null) {
       emit(
         state.copyWith(
+          error: res.error,
           hasError: true,
           isLoading: false,
           isFetchingOnScroll: false,
@@ -62,7 +61,7 @@ class AppCubit extends Cubit<AppState> {
           updatedArticleList.addAll(res.data!);
         }
       } else {
-        updatedArticleList = res.data??[];
+        updatedArticleList = res.data ?? [];
       }
       // emit state list
       emit(

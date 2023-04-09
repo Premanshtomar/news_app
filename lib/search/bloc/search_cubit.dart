@@ -37,6 +37,33 @@ class SearchCubit extends Cubit<SearchState> {
     );
   }
 
+  void setPreviousPageList(List<Article> articles) {
+    emit(
+      state.copyWith(listFromPage: articles, articleList: articles),
+    );
+  }
+
+  void searchInPage(String text) {
+    if (text.trim().isEmpty) {
+      var articles = [...state.listFromPage];
+      emit(
+        state.copyWith(
+          articleList: articles,
+        ),
+      );
+    } else {
+      var articles = state.listFromPage
+          .where(
+              (e) => (e.title ?? '').toLowerCase().contains(text.toLowerCase()))
+          .toList();
+      emit(
+        state.copyWith(
+          articleList: articles,
+        ),
+      );
+    }
+  }
+
   void clearSearchQueryText() {
     searchTextController.clear();
     emit(state.copyWith(

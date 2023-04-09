@@ -29,7 +29,7 @@ class SearchNews extends StatelessWidget {
                   controller: cubit.searchTextController,
                   onChanged: (val) async {
                     if (searchType == SearchEnum.searchInPage) {
-                      // tod
+                      cubit.searchInPage(val);
                     } else {
                       await cubit.searchArticles(val);
                     }
@@ -47,13 +47,14 @@ class SearchNews extends StatelessWidget {
                     ),
                     suffixIcon: IconButton(
                       onPressed: () async {
-                        // if (searchType == SearchEnum.searchInPage) {
-                        //   // tod
-                        // } else {
-                        //   await cubit.searchArticles(
-                        //     cubit.searchTextController.text.trim(),
-                        //   );
-                        // }
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        if (searchType == SearchEnum.searchInPage) {
+                          cubit.searchInPage(cubit.searchTextController.text);
+                        } else {
+                          await cubit.searchArticles(
+                            cubit.searchTextController.text.trim(),
+                          );
+                        }
                       },
                       icon: const Icon(
                         AppIcons.icSearch,
@@ -83,7 +84,7 @@ class SearchNews extends StatelessWidget {
                   : state.articleList.isEmpty
                       ? const Center(
                           child: Text(
-                            'List is Empty!!',
+                            'List is Empty',
                             style: AppTextStyles.bodyText18BlackBold,
                           ),
                         )
