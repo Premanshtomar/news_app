@@ -12,7 +12,6 @@ import 'package:news_app/splash/screens/splash_screen.dart';
 import 'package:news_app/values/colors.dart';
 import 'package:news_app/values/routes.dart';
 
-
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
